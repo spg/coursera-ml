@@ -82,18 +82,28 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
+alpha1 = 0.3;
+alpha2 = 0.06;
+alpha3 = 0.09;
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
-theta = zeros(3, 1);
-[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+theta1 = zeros(3, 1);
+theta2 = zeros(3, 1);
+theta3 = zeros(3, 1);
+[theta, J_history1] = gradientDescentMulti(X, y, theta1, alpha1, num_iters);
+[theta, J_history2] = gradientDescentMulti(X, y, theta2, alpha2, num_iters);
+[theta, J_history3] = gradientDescentMulti(X, y, theta3, alpha3, num_iters);
 
 % Plot the convergence graph
 figure;
-plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+plot(1:numel(J_history1), J_history1, 'b', 'LineWidth', 2);
+hold on;
+plot(1:numel(J_history2), J_history2, 'r', 'LineWidth', 2);
+plot(1:numel(J_history3), J_history3, 'k', 'LineWidth', 2);
 xlabel('Number of iterations');
 ylabel('Cost J');
+axis([0 50]);
 
 % Display gradient descent's result
 fprintf('Theta computed from gradient descent: \n');
@@ -114,46 +124,4 @@ fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
-
-%% ================ Part 3: Normal Equations ================
-
-fprintf('Solving with normal equations...\n');
-
-% ====================== YOUR CODE HERE ======================
-% Instructions: The following code computes the closed form 
-%               solution for linear regression using the normal
-%               equations. You should complete the code in 
-%               normalEqn.m
-%
-%               After doing so, you should complete this code 
-%               to predict the price of a 1650 sq-ft, 3 br house.
-%
-
-%% Load Data
-data = csvread('ex1data2.txt');
-X = data(:, 1:2);
-y = data(:, 3);
-m = length(y);
-
-% Add intercept term to X
-X = [ones(m, 1) X];
-
-% Calculate the parameters from the normal equation
-theta = normalEqn(X, y);
-
-% Display normal equation's result
-fprintf('Theta computed from the normal equations: \n');
-fprintf(' %f \n', theta);
-fprintf('\n');
-
-
-% Estimate the price of a 1650 sq-ft, 3 br house
-% ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
-
-
-% ============================================================
-
-fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using normal equations):\n $%f\n'], price);
 
