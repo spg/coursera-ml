@@ -12,9 +12,7 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
-
-
-
+plot(X(:, 1)(y==1), X(:, 2)(y==1), "k+", X(:, 1)(y==0), X(:, 2)(y==0), "ko");
 
 
 
