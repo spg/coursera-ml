@@ -77,22 +77,8 @@ a_2 = [ones(size(a_2, 1), 1) a_2];
 z_3 = a_2 * Theta2';
 h_of_x = sigmoid(z_3);
 
-
-J = 1/m * sum(sum(-y .* log(h_of_x) - (ones(size(y, 1), size(y, 2)) - y) .* log(ones(m, num_labels) - h_of_x), 2));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+reg = lambda/(2 * m) * (sum(sum(Theta1(:, 2:size(Theta1, 2)) .* Theta1(:, 2:size(Theta1, 2)))) + sum(sum(Theta2(:, 2:size(Theta2, 2)) .* Theta2(:, 2:size(Theta2, 2)))));
+J = 1/m * sum(sum(-y .* log(h_of_x) - (ones(size(y, 1), size(y, 2)) - y) .* log(ones(m, num_labels) - h_of_x), 2)) + reg;
 
 
 
