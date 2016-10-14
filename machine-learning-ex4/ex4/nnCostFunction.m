@@ -110,6 +110,16 @@ Theta1_grad = 1/m * Theta1_grad;
 Theta2_grad = 1/m * Theta2_grad;
 
 
+% regularization
+Theta1_copy = Theta1;
+Theta1_copy(:, 1) = 0;
+Theta1_grad = Theta1_grad + lambda/m * Theta1_copy;
+
+Theta2_copy = Theta2;
+Theta2_copy(:, 1) = 0;
+Theta2_grad = Theta2_grad + lambda/m * Theta2_copy;
+
+
 % -------------------------------------------------------------
 
 % =========================================================================
