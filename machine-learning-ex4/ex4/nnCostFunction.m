@@ -81,6 +81,34 @@ reg = lambda/(2 * m) * (sum(sum(Theta1(:, 2:size(Theta1, 2)) .* Theta1(:, 2:size
 J = 1/m * sum(sum(-y .* log(h_of_x) - (ones(size(y, 1), size(y, 2)) - y) .* log(ones(m, num_labels) - h_of_x), 2)) + reg;
 
 
+for t = 1:m
+    % step 1
+    a_1 = X(t, :)';
+    z_2 = Theta1 * a_1;
+    a_2 = sigmoid(z_2);
+    a_2 = [1; a_2];
+    z_3 = Theta2 * a_2;
+    a_3 = sigmoid(z_3);
+
+    % step 2
+    y_t = (y(t, :))';
+    d_3 = a_3 - y_t;
+
+    % step 3
+    d_2 = (Theta2' * d_3) .* [1; sigmoidGradient(z_2)];
+
+    % step 4
+    d_2 = d_2(2:end);
+
+    Theta2_grad = Theta2_grad + d_3 * a_2';
+    Theta1_grad = Theta1_grad + d_2 * a_1';
+
+end
+
+% step 5
+Theta1_grad = 1/m * Theta1_grad;
+Theta2_grad = 1/m * Theta2_grad;
+
 
 % -------------------------------------------------------------
 
