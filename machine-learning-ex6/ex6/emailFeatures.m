@@ -48,9 +48,15 @@ x = zeros(n, 1);
 %
 %
 
+for word_number = 1:n
 
+    if any(word_indices == word_number)
+        x(word_number) = 1;
+    end
 
+end
 
+%x
 
 
 
