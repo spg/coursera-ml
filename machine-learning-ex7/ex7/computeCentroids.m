@@ -26,6 +26,11 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+for i = 1:K
+    selected_idx = idx == i;
+    x_subset = X(selected_idx, :);
+    centroids(i, :) = 1/size(x_subset, 1) * sum(x_subset);
+end
 
 
 
