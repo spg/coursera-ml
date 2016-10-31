@@ -21,11 +21,16 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+for i = 1:size(X, 1)
+    row = X(i, :);
+    vector_lengths = [];
+    for k = 1:size(centroids, 1)
+        vector_length = norm(row - centroids(k, :))^2;
+        vector_lengths = [vector_lengths; vector_length];
+    end
+    [V, I] = min(vector_lengths);
+    idx(i) = I;
+end
 
 % =============================================================
 
